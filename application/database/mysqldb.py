@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine("mysql+pymysql://root:123456@192.168.0.104:3306/waterflowers?charset=utf8",
                        convert_unicode=True,
-                       echo=True)
+                       echo=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
