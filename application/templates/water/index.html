@@ -1,0 +1,18 @@
+{% extends "common/admin_page.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    {% block right_content %}
+    暂无数据
+    {% endblock %}
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='amazeui/assets/js/amazeui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='amazeui/assets/js/app.js') }}"></script>
+{% endblock %}

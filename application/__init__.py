@@ -30,12 +30,7 @@ def create_app():
 
     init_db()
 
-    # 后台管理
     from application.controllers.admin import bp_admin
     app.register_blueprint(bp_admin, url_prefix='/admin')
-
-    # 前端页面
-    from application.controllers.front import bp_front
-    app.register_blueprint(bp_front, url_prefix='/front')
 
     return app
