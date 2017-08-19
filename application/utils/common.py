@@ -28,7 +28,8 @@ def run_order(order):
     type in(GPIO.IN) out(GPIO.OUT)
     value 1 GPIO.HIGH 0 GPIO.LOW
 '''
-def send_gpio_order(channel, type='in', value=1):
+def send_gpio_order(param):
+    channel, type, value = param
     try:
         import RPi.GPIO as GPIO
     except RuntimeError:
