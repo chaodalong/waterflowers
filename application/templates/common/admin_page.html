@@ -38,7 +38,7 @@
         <div class="am-offcanvas-bar admin-offcanvas-bar">
             <ul class="am-list admin-sidebar-list">
                 <li class="admin-parent">
-                    <a href="{{ url_for('bp_admin.water') }}" class="am-cf">
+                    <a href="{{ url_for('bp_admin.water_index') }}" class="am-cf">
                         <span class="am-icon-leaf"></span>
                         浇花
                     </a>
@@ -51,6 +51,10 @@
     <!-- content start -->
     <div class="admin-content">
         <div class="admin-content-body">
+            <div class="am-cf am-padding am-padding-bottom-0">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">{{ page_title }}</strong></div>
+            </div>
+            <hr/>
             {% block right_content %}
             {% endblock %}
         </div>

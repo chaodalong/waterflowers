@@ -7,7 +7,39 @@
 {% block content %}
     {{ super() }}
     {% block right_content %}
-    暂无数据
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-8">
+            <a href="{{ url_for('bp_admin.water_run') }}" type="button" class="am-btn am-btn-success">开始浇花</a>
+        </div>
+        <table class="am-table am-table-striped am-table-hover table-main">
+          <thead>
+              <tr>
+                <th class="table-check"><input type="checkbox" /></th>
+                <th class="table-id">ID</th>
+                <th class="table-date am-hide-sm-only">浇花日期</th>
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+          {% for log in water_logs %}
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>{{ log.id }}</td>
+            <td class="am-hide-sm-only">{{ log.created_at }}</td>
+            <td>
+              <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                  <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span> 编辑</button>
+                  <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 复制</button>
+                  <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+    </div>
     {% endblock %}
 {% endblock %}
 
