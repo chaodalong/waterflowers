@@ -3,6 +3,7 @@ from flask import render_template, redirect, url_for, session
 from .baseview import BaseView
 from application.utils.common import run_order
 from application.models.WaterLogModel import WaterLogModel
+import time
 
 class Water(BaseView):
     methods = ['GET', 'POST']
@@ -27,4 +28,13 @@ class Water(BaseView):
 
     def run(self):
         run_order('begin_water')
-        return redirect(url_for('bp_admin.login'))
+        time.sleep(10)
+        run_order('stop_water')
+        return redirect(url_for('bp_admin.water_index'))
+
+    '''
+    停止浇花
+    '''
+    def stop(self):
+        run_order('stop_water')
+        return redirect(url_for('bp_admin.water_index'))

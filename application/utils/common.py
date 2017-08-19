@@ -7,7 +7,6 @@ def md5(str=None):
 
 def playVoice(file=None):
     import pygame
-    print file
     pygame.mixer.init()
     pygame.mixer.music.load(file)
     pygame.mixer.music.play(1, start=0.0)
@@ -18,8 +17,11 @@ def run_order(order):
     ORDERS = current_app.config.get('ORDERS')
     if order in ORDERS:
         voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
+        # 播放声音
+        #print voice_file
         playVoice(voice_file)
-        if order == 'begin_water':
+        if order == 'begin_water' or order == 'stop_water':
+            # 发送GPIO信号
             send_gpio_order(ORDERS[order]['gpio_info'])
     else:
         return False
@@ -43,5 +45,3 @@ def send_gpio_order(param):
     else:
         GPIO.setup(channel, GPIO.OUT)
         GPIO.output(channel, value)
-
-    GPIO.cleanup()
