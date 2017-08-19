@@ -14,5 +14,6 @@ bp_admin.add_url_rule('/logout', view_func=User.as_view('logout', method_name='l
 # dashboard
 bp_admin.add_url_rule('/water/index', view_func=Water.as_view('water_index', method_name='index'))
 bp_admin.add_url_rule('/water/run', view_func=Water.as_view('water_run', method_name='run'))
+bp_admin.add_url_rule('/water/stop', view_func=Water.as_view('water_stop', method_name='stop'))
 
 __all__ = [bp_admin]
