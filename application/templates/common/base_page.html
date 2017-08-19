@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+{% block head %}
+<head lang="zh-cn">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="stylesheet" href="{{ url_for('static', filename='amazeui/assets/css/amazeui.min.css') }}">
+
+  <title>
+    {% block title %}
+    {{ page_title }}
+    {% endblock %}
+  </title>
+</head>
+{% endblock %}
+
+<body>
+{% block content %}
+  <div id="content">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes" style="color: red;">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+  </div>
+{% endblock %}
+
+{% block footer %}
+  <div id="footer">
+    <script src="{{ url_for('static', filename='plugins/jquery/jQuery-2.1.4.min.js') }}"></script>
+  </div>
+{% endblock %}
+</body>
+</html>
