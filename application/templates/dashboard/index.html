@@ -1,0 +1,13 @@
+{% extends "common/header.html" %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+  欢迎你，{{ data.username }}, <a href="{{ url_for('bp_front.logout') }}">登出</a>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+{% endblock %}
