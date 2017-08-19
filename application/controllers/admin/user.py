@@ -20,19 +20,18 @@ class User(BaseView):
             username = request.form['username']
             password = md5(request.form['password'])
             if 'username' in session:
-                return redirect(url_for('bp_admin.water'))
+                return redirect(url_for('bp_admin.water_index'))
             else:
                 user = UserModel.query.filter(UserModel.name == username).first()
-                print user
                 if user is not None and user.password == password:
                     session['username'] = username
-                    return redirect(url_for('bp_admin.water'))
+                    return redirect(url_for('bp_admin.water_index'))
                 else:
                     flash(u"用户名或密码错误")
             return render_template('user/login.html', page_title=self.page_title)
         else:
             if 'username' in session:
-                return redirect(url_for('bp_admin.water'))
+                return redirect(url_for('bp_admin.water_index'))
             else:
                 return render_template('user/login.html', page_title=self.page_title)
 
@@ -41,4 +40,4 @@ class User(BaseView):
 
         if 'username' in session:
             del session['username']
-        return redirect(url_for('bp_admin.login'), page_title=self.page_title)
+        return redirect(url_for('bp_admin.login'))
