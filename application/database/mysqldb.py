@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("mysql+pymysql://root:123456@127.0.0.1:3306/waterflowers?charset=utf8",
+engine = create_engine("mysql+pymysql://root:123456@192.168.0.104:3306/waterflowers?charset=utf8",
                        convert_unicode=True,
                        echo=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
