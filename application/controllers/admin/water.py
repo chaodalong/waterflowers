@@ -28,8 +28,6 @@ class Water(BaseView):
 
     def run(self):
         run_order('begin_water')
-        time.sleep(10)
-        run_order('stop_water')
         return redirect(url_for('bp_admin.water_index'))
 
     '''

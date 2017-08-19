@@ -31,7 +31,9 @@ def run_order(order):
     value 1 GPIO.HIGH 0 GPIO.LOW
 '''
 def send_gpio_order(param):
+    print param
     channel, type, value = param
+
     try:
         import RPi.GPIO as GPIO
     except RuntimeError:
