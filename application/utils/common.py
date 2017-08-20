@@ -15,6 +15,8 @@ def playVoice(file=None):
     while True:
         if not pygame.mixer.music.get_busy():
             break
+    # 关闭播放
+    pygame.mixer.music.stop()
 
 def run_order(order):
     import flask,time
