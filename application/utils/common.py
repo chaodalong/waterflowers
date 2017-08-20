@@ -9,7 +9,12 @@ def playVoice(file=None):
     import pygame
     pygame.mixer.init()
     pygame.mixer.music.load(file)
+    pygame.mixer.music.set_volume(1)
     pygame.mixer.music.play(1, start=0.0)
+    # 阻塞进程
+    while True:
+        if not pygame.mixer.music.get_busy():
+            break
 
 def run_order(order):
     import flask
