@@ -17,17 +17,24 @@ def playVoice(file=None):
             break
 
 def run_order(order):
-    import flask
+    import flask,time
     current_app = flask.current_app
     ORDERS = current_app.config.get('ORDERS')
     if order in ORDERS:
         voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
-        # 播放声音
-        #print voice_file
-        playVoice(voice_file)
-        if order == 'begin_water' or order == 'stop_water':
-            # 发送GPIO信号
+        if order == 'begin_water':
+            ''' 
+            开始浇花，先播放声音，再接通水泵
+            '''
+            playVoice(voice_file)
+            time.sleep(1)
             send_gpio_order(ORDERS[order]['gpio_info'])
+        elif order == 'stop_water':
+            ''' 
+            停止浇花，先接通水泵， 再播放声音（防止水益处）
+            '''
+            send_gpio_order(ORDERS[order]['gpio_info'])
+            playVoice(voice_file)
     else:
         return False
 
