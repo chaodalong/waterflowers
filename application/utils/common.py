@@ -24,14 +24,14 @@ def run_order(order):
         voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
         if order == 'begin_water':
             ''' 
-            开始浇花，先播放声音，再接通水泵
+            开始浇花：先播放声音，再接通水泵
             '''
             playVoice(voice_file)
             time.sleep(1)
             send_gpio_order(ORDERS[order]['gpio_info'])
-        elif order == 'stop_water':
+        elif order == 'auto_stop_water' or order == 'stop_water':
             ''' 
-            停止浇花，先接通水泵， 再播放声音（防止水益处）
+            停止浇花：先断开水泵，再播放声音（防止水益处）
             '''
             send_gpio_order(ORDERS[order]['gpio_info'])
             playVoice(voice_file)
