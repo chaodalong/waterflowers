@@ -12,11 +12,11 @@ ORDERS = {
     },
     'stop_water': {
         'voice': 'static/voice/stop_water.mp3',
-        'gpio_info': (22, 'out', 0) # 22引脚 输出 高电平
+        'gpio_info': (22, 'out', 0)
     },
     'auto_stop_water': {
         'voice': 'static/voice/auto_stop_water.mp3',
-        'gpio_info': (22, 'out', 0) # 22引脚 输出 高电平
+        'gpio_info': (22, 'out', 0)
     },
 }
 
