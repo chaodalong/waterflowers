@@ -29,9 +29,10 @@ class Water(BaseView):
     def run(self):
         run_order('begin_water')
 
-        # 10秒后自动关闭，防止水溢出
-        time.sleep(10)
-        run_order('auto_stop_water')
+        # todo 写入队列，不能阻塞前端页面调转
+        # # 10秒后自动关闭，防止水溢出
+        # time.sleep(10)
+        # run_order('auto_stop_water')
 
         return redirect(url_for('bp_admin.water_index'))
 
