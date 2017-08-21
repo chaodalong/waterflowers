@@ -5,6 +5,9 @@ def md5(str=None):
     m.update(str)
     return m.hexdigest()
 
+'''
+播放声音
+'''
 def playVoice(file=None):
     import pygame
     pygame.mixer.init()
@@ -18,6 +21,11 @@ def playVoice(file=None):
     # 关闭播放
     pygame.mixer.music.stop()
 
+'''
+执行命令
+：param order 
+配置文件的ORDERS
+'''
 def run_order(order):
     import flask,time
     current_app = flask.current_app
@@ -41,6 +49,7 @@ def run_order(order):
         return False
 
 '''
+    GPIO发送信号
     type in(GPIO.IN) out(GPIO.OUT)
     value 1 GPIO.HIGH 0 GPIO.LOW
 '''
