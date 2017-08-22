@@ -27,7 +27,7 @@ def playVoice(file=None):
 
 def run_order(order):
     """
-    执行命令
+    执行命令：播放声音、发送GPIO命令
     :param order:
     :return:
     """
@@ -41,6 +41,10 @@ def run_order(order):
             playVoice(voice_file)
             time.sleep(1)
             send_gpio_order(ORDERS[order]['gpio_info'])
+
+            # 十秒自动停止，溢水保护
+            time.sleep(10)
+            run_order('stop_water')
         elif order == 'auto_stop_water' or order == 'stop_water':
             # 停止浇花：先断开水泵，再播放声音（防止水益处）
             send_gpio_order(ORDERS[order]['gpio_info'])

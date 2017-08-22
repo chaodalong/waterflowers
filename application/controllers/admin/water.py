@@ -1,21 +1,31 @@
 # -*-coding: utf-8 -*-
 from flask import render_template, redirect, url_for, session
-from .baseview import BaseView
-from application.utils.common import run_order
+from application.core.baseview import BaseView
+from application.core.redis import redis_store
 from application.models.WaterLogModel import WaterLogModel
-import time
+from application.utils.common import md5
+import flask
+
 
 class Water(BaseView):
+    """
+    浇花控制器类
+    """
     methods = ['GET', 'POST']
     page_title = u'浇花'
 
     def __init__(self, method_name=None):
         self.method_name = method_name
+        self.order_redis_key = md5(flask.current_app.config.get('SECRET_KEY') + 'water_order_list:')
 
     def dispatch_request(self):
         return getattr(self, self.method_name)()
 
     def index(self):
+        """
+        浇花首页
+        :return:
+        """
         if 'username' in session:
             username = session['username']
             data = {'username': username}
@@ -27,18 +37,18 @@ class Water(BaseView):
             return redirect(url_for('bp_admin.login'))
 
     def run(self):
-        run_order('begin_water')
-
-        # todo 写入队列，不能阻塞前端页面调转
-        # # 10秒后自动关闭，防止水溢出
-        # time.sleep(10)
-        # run_order('auto_stop_water')
-
+        """
+        开始浇花
+        :return:
+        """
+        redis_store.rpush(self.order_redis_key, 'begin_water')
         return redirect(url_for('bp_admin.water_index'))
 
-    '''
-    停止浇花
-    '''
+
     def stop(self):
-        run_order('stop_water')
+        """
+        停止浇花
+        :return:
+        """
+        redis_store.rpush(self.order_redis_key, 'stop_water')
         return redirect(url_for('bp_admin.water_index'))

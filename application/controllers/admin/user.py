@@ -1,11 +1,15 @@
 # -*-coding: utf-8 -*-
-from flask import (render_template, request, redirect, url_for,
-session, flash)
-from .baseview import BaseView
+from flask import render_template, request, redirect, url_for, \
+    session, flash
+from application.core.baseview import BaseView
 from application.models.UserModel import UserModel
 from application.utils.common import md5
 
+
 class User(BaseView):
+    """
+    用户登录、登出控制器类
+    """
     methods = ['GET', 'POST']
 
     def __init__(self, method_name=None):
@@ -15,6 +19,10 @@ class User(BaseView):
         return getattr(self, self.method_name)()
 
     def login(self):
+        """
+        登录
+        :return:
+        """
         self.page_title = u'登录'
         if request.method == 'POST':
             username = request.form['username']
@@ -36,6 +44,10 @@ class User(BaseView):
                 return render_template('user/login.html', page_title=self.page_title)
 
     def logout(self):
+        """
+        登出
+        :return:
+        """
         self.page_title = '登出'
 
         if 'username' in session:

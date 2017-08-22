@@ -1,7 +1,12 @@
+# -*- coding: utf-8 -*-
 from sqlalchemy import Column, Integer, TIMESTAMP, text
-from application.database.mysqldb import Base
+from application.core.msqldb import Base
+
 
 class WaterLogModel(Base):
+    """
+    浇花日志类
+    """
     __tablename__ = 'water_log'
 
     id = Column(Integer, primary_key=True)

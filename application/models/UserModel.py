@@ -1,7 +1,12 @@
+# -*- coding: utf-8 -*-
 from sqlalchemy import Column, Integer, String
-from application.database.mysqldb import Base
+from application.core.msqldb import Base
+
 
 class UserModel(Base):
+    """
+    用户模型类
+    """
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
