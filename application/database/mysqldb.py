@@ -11,7 +11,7 @@ def init_db(app):
     :param app:
     :return:
     """
-    
+
     database_config = app.config.get('DATABASE')
     engine = create_engine(database_config, convert_unicode=True, echo=False)
 
