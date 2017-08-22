@@ -5,6 +5,7 @@ def md5(str=None):
     m.update(str)
     return m.hexdigest()
 
+  
 def playVoice(file=None):
     """
     播放声音
@@ -22,6 +23,7 @@ def playVoice(file=None):
             break
     # 关闭播放
     pygame.mixer.music.stop()
+
 
 def run_order(order):
     """
@@ -45,6 +47,7 @@ def run_order(order):
             playVoice(voice_file)
     else:
         return False
+
 
 def send_gpio_order(param):
     """
