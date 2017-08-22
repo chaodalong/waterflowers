@@ -5,10 +5,12 @@ def md5(str=None):
     m.update(str)
     return m.hexdigest()
 
-'''
-播放声音
-'''
 def playVoice(file=None):
+    """
+    播放声音
+    :param file:
+    :return:
+    """
     import pygame
     pygame.mixer.init()
     pygame.mixer.music.load(file)
@@ -21,42 +23,39 @@ def playVoice(file=None):
     # 关闭播放
     pygame.mixer.music.stop()
 
-'''
-执行命令
-：param order 
-配置文件的ORDERS
-'''
 def run_order(order):
+    """
+    执行命令
+    :param order:
+    :return:
+    """
     import flask,time
     current_app = flask.current_app
     ORDERS = current_app.config.get('ORDERS')
     if order in ORDERS:
         voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
         if order == 'begin_water':
-            ''' 
-            开始浇花：先播放声音，再接通水泵
-            '''
+            # 开始浇花：先播放声音，再接通水泵
             playVoice(voice_file)
             time.sleep(1)
             send_gpio_order(ORDERS[order]['gpio_info'])
         elif order == 'auto_stop_water' or order == 'stop_water':
-            ''' 
-            停止浇花：先断开水泵，再播放声音（防止水益处）
-            '''
+            # 停止浇花：先断开水泵，再播放声音（防止水益处）
             send_gpio_order(ORDERS[order]['gpio_info'])
             playVoice(voice_file)
     else:
         return False
 
-'''
+def send_gpio_order(param):
+    """
     GPIO发送信号
     type in(GPIO.IN) out(GPIO.OUT)
     value 1 GPIO.HIGH 0 GPIO.LOW
-'''
-def send_gpio_order(param):
+    :param param:
+    :return:
+    """
     print param
     channel, type, value = param
-
     try:
         import RPi.GPIO as GPIO
     except RuntimeError:
@@ -70,3 +69,4 @@ def send_gpio_order(param):
     else:
         GPIO.setup(channel, GPIO.OUT)
         GPIO.output(channel, value)
+
