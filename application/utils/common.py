@@ -26,31 +26,32 @@ def playVoice(file=None):
 
 
 def run_order(order):
-    """
-    执行命令：播放声音、发送GPIO命令
-    :param order:
-    :return:
-    """
-    import flask,time
-    current_app = flask.current_app
-    ORDERS = current_app.config.get('ORDERS')
-    if order in ORDERS:
-        voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
-        if order == 'begin_water':
-            # 开始浇花：先播放声音，再接通水泵
-            playVoice(voice_file)
-            time.sleep(1)
-            send_gpio_order(ORDERS[order]['gpio_info'])
-
-            # 十秒自动停止，溢水保护
-            time.sleep(10)
-            run_order('stop_water')
-        elif order == 'auto_stop_water' or order == 'stop_water':
-            # 停止浇花：先断开水泵，再播放声音（防止水益处）
-            send_gpio_order(ORDERS[order]['gpio_info'])
-            playVoice(voice_file)
-    else:
-        return False
+    print 1
+    # """
+    # 执行命令：播放声音、发送GPIO命令
+    # :param order:
+    # :return:
+    # """
+    # import flask,time
+    # current_app = flask.current_app
+    # ORDERS = current_app.config.get('ORDERS')
+    # if order in ORDERS:
+    #     voice_file = current_app.root_path + '/' + ORDERS[order]['voice']
+    #     if order == 'begin_water':
+    #         # 开始浇花：先播放声音，再接通水泵
+    #         playVoice(voice_file)
+    #         time.sleep(1)
+    #         send_gpio_order(ORDERS[order]['gpio_info'])
+    #
+    #         # 十秒自动停止，溢水保护
+    #         time.sleep(10)
+    #         run_order('stop_water')
+    #     elif order == 'auto_stop_water' or order == 'stop_water':
+    #         # 停止浇花：先断开水泵，再播放声音（防止水益处）
+    #         send_gpio_order(ORDERS[order]['gpio_info'])
+    #         playVoice(voice_file)
+    # else:
+    #     return False
 
 
 def send_gpio_order(param):

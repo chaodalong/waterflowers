@@ -23,7 +23,7 @@ def set_logger_handler(app):
     app.logger.addHandler(filehandler)
 
 
-def create_web_app():
+def create_app():
     """
     创建web应用
     :return: app instance
@@ -45,7 +45,6 @@ def create_web_app():
 
 def create_cron_app():
     """
-    创建cron应用
     :return: app instance
     """
     app = Flask(__name__.split('.')[0], instance_relative_config=True)
